@@ -29,29 +29,25 @@ public class PlayerControls : MonoBehaviour
     {
         if (Input.GetButton("Fire1"))
         {
-            ActiveLasers();
+            SetLasersActive(true);
         }
         else
         {
-            DeactiveLasers();    
+            SetLasersActive(false);    
         }
 
     }
-    private void ActiveLasers()
+    private void SetLasersActive(bool isActive)
     {
-        foreach (GameObject laser in lasers)
-        {
-            laser.SetActive(true);
+        foreach (GameObject laser in lasers)                        
+        { 
+            var  emmisionModule = laser.GetComponent<ParticleSystem>().emission;  //lasers doesn't stop when we stopping pushing button (we on/off emission)
+           emmisionModule.enabled = isActive;
+
         }
     }
 
-    private void DeactiveLasers()
-    {
-        foreach (GameObject laser in lasers)
-        {
-            laser.SetActive(false);
-        }
-    }
+
 
 
 
