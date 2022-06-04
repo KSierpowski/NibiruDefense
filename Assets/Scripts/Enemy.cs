@@ -8,6 +8,7 @@ public class Enemy : MonoBehaviour
     [SerializeField] Transform parent;
     [SerializeField] int scorePerHit = 15;
     [SerializeField] int healthPoints = 10;
+    [SerializeField] GameObject hitVFX;
 
 
      ScoreBoard scoreBoard;
@@ -16,8 +17,6 @@ public class Enemy : MonoBehaviour
      void Start()
     {
         scoreBoard = FindObjectOfType<ScoreBoard>();
-    
-
     }
 
 
@@ -41,6 +40,8 @@ public class Enemy : MonoBehaviour
 
     void ProcessHit()
     {
+        GameObject vfx = Instantiate(hitVFX, transform.position, Quaternion.identity);
+        vfx.transform.parent = parent;
         healthPoints--;
         scoreBoard.IncreaseScore(scorePerHit);
         
