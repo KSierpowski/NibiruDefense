@@ -40,6 +40,7 @@ public class Enemy : MonoBehaviour
     {
         GameObject vfx = Instantiate(explosionVFX, transform.position, Quaternion.identity);
         vfx.transform.parent = parentGameObject.transform;     //klony zrobione wyzej (vfx) zamiast zaœmiecaæ hierarchy s¹ wrzucany do pustego gameobject "parent"  
+        scoreBoard.IncreaseScore(scorePerHit);
         Destroy(gameObject);
     }
 
@@ -48,7 +49,6 @@ public class Enemy : MonoBehaviour
         GameObject vfx = Instantiate(hitVFX, transform.position, Quaternion.identity);
         vfx.transform.parent = parentGameObject.transform;
         healthPoints--;
-        scoreBoard.IncreaseScore(scorePerHit);
         
     }
 
