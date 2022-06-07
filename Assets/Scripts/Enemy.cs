@@ -4,16 +4,19 @@ using UnityEngine;
 
 public class Enemy : MonoBehaviour
 {
-    [SerializeField] GameObject explosionVFX;
+    [SerializeField] GameObject explosionFX;
     [SerializeField] int scorePerHit = 15;
     [SerializeField] int healthPoints = 10;
     [SerializeField] GameObject hitVFX;
+  
 
     GameObject parentGameObject;
     ScoreBoard scoreBoard;
 
 
-     void Start()
+
+
+    void Start()
     {
         scoreBoard = FindObjectOfType<ScoreBoard>();
         parentGameObject = GameObject.FindWithTag("SpawnAtRuntime");
@@ -36,10 +39,11 @@ public class Enemy : MonoBehaviour
         }
     }
 
-    void KillEnemy()
+    void KillEnemy()    
     {
-        GameObject vfx = Instantiate(explosionVFX, transform.position, Quaternion.identity);
-        vfx.transform.parent = parentGameObject.transform;     //klony zrobione wyzej (vfx) zamiast zaœmiecaæ hierarchy s¹ wrzucany do pustego gameobject "parent"  
+    
+        GameObject fx = Instantiate(explosionFX, transform.position, Quaternion.identity);
+        fx.transform.parent = parentGameObject.transform;     //klony zrobione wyzej (vfx) zamiast zaœmiecaæ hierarchy s¹ wrzucany do pustego gameobject "parent"  
         scoreBoard.IncreaseScore(scorePerHit);
         Destroy(gameObject);
     }
